@@ -22,7 +22,9 @@ export default function App() {
   };
 
   console.log(focusHistory);
-  const onClear = () => {};
+  const onClear = () => {
+    setFocusHistory([]);
+  };
 
   return (
     <View style={styles.container}>
