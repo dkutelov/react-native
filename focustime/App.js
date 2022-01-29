@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Platform } from 'react-native';
 import Constants from 'expo-constants';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { Focus } from './src/features/focus/Focus';
 import { FocusHistory } from './src/features/focus/FocusHistory';
@@ -17,14 +18,44 @@ export default function App() {
   const [focusSubject, setFocusSubject] = useState(null);
   const [focusHistory, setFocusHistory] = useState([]);
 
-  const addFocusHistroySubjectWithState = (subject, status) => {
-    setFocusHistory([...focusHistory, { subject, status }]);
+  const addFocusHistroySubjectWithStatus = (subject, status) => {
+    setFocusHistory([
+      ...focusHistory,
+      { key: String(focusHistory.length + 1), subject, status },
+    ]);
   };
 
-  console.log(focusHistory);
   const onClear = () => {
     setFocusHistory([]);
   };
+
+  const saveFocusHistory = async () => {
+    try {
+      await AsyncStorage.setItem('focusHistory', JSON.stringify(focusHistory));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const loadFocusHistory = async () => {
+    try {
+      const history = await AsyncStorage.getItem('focusHistory');
+
+      if (history && JSON.parse(history)) {
+        setFocusHistory(JSON.parse(history));
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    saveFocusHistory();
+  }, [focusHistory]);
+
+  useEffect(() => {
+    loadFocusHistory();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -32,19 +63,19 @@ export default function App() {
         <Timer
           focusSubject={focusSubject}
           onTimerEnd={() => {
-            addFocusHistroySubjectWithState(focusSubject, STATUSES.COMPLETE);
+            addFocusHistroySubjectWithStatus(focusSubject, STATUSES.COMPLETE);
             setFocusSubject(null);
           }}
           clearSubject={() => {
-            addFocusHistroySubjectWithState(focusSubject, STATUSES.CANCELLED);
+            addFocusHistroySubjectWithStatus(focusSubject, STATUSES.CANCELLED);
             setFocusSubject(null);
           }}
         />
       ) : (
-        <>
+        <View style={{ flex: 1 }}>
           <Focus addSubject={setFocusSubject} />
           <FocusHistory focusHistory={focusHistory} onClear={onClear} />
-        </>
+        </View>
       )}
     </View>
   );
