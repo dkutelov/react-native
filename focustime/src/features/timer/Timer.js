@@ -9,7 +9,7 @@ import { Timing } from './Timing';
 import { colors } from '../../utils/colors';
 import { spacing } from '../../utils/sizes';
 
-const DEFAULT_TIME = 1;
+const DEFAULT_TIME = 0.1;
 
 export const Timer = ({ focusSubject, onTimerEnd, clearSubject }) => {
   // hook that avoids app going to sleep
