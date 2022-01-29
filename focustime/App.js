@@ -8,7 +8,7 @@ import { colors } from './src/utils/colors';
 import { spacing } from './src/utils/sizes';
 
 export default function App() {
-  const [focusSubject, setFocusSubject] = React.useState(null);
+  const [focusSubject, setFocusSubject] = React.useState("Gardening");
   return (
     <View style={styles.container}>
       {focusSubject ? (
