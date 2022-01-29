@@ -8,15 +8,20 @@ import { colors } from './src/utils/colors';
 import { spacing } from './src/utils/sizes';
 
 export default function App() {
-  const [focusSubject, setFocusSubject] = React.useState("Gardening");
+  const [focusSubject, setFocusSubject] = React.useState('New Task');
   return (
     <View style={styles.container}>
       {focusSubject ? (
-        <Timer focusSubject={focusSubject} />
+        <Timer
+          focusSubject={focusSubject}
+          onTimerEnd={() => {
+            setFocusSubject(null);
+          }}
+          clearSubject={() => setFocusSubject(null)}
+        />
       ) : (
         <Focus addSubject={setFocusSubject} />
       )}
-      <Text>{focusSubject}</Text>
     </View>
   );
 }

@@ -11,7 +11,7 @@ import { spacing } from '../../utils/sizes';
 
 const DEFAULT_TIME = 1;
 
-export const Timer = ({ focusSubject }) => {
+export const Timer = ({ focusSubject, onTimerEnd, clearSubject }) => {
   // hook that avoids app going to sleep
   useKeepAwake();
 
@@ -35,10 +35,11 @@ export const Timer = ({ focusSubject }) => {
   };
 
   const onEnd = () => {
+    vibrate();
     setMinutes(DEFAULT_TIME);
     setProgress(1);
     setIsStarted(false);
-    vibrate();
+    onTimerEnd();
   };
 
   const changeTime = (timeInMinutes) => {
@@ -71,12 +72,19 @@ export const Timer = ({ focusSubject }) => {
       <View style={styles.timeButtonWrapper}>
         <Timing onTimeChange={changeTime} />
       </View>
-      <View style={styles.startButtonWrapper}>
+      <View style={styles.startCancelButtonsWrapper}>
         {isStarted ? (
           <RoundedButton title="pause" onPress={() => setIsStarted(false)} />
         ) : (
           <RoundedButton title="start" onPress={() => setIsStarted(true)} />
         )}
+      </View>
+      <View style={styles.clearSubject}>
+        <RoundedButton
+          size={spacing.xxxl}
+          title="-"
+          onPress={() => clearSubject()}
+        />
       </View>
     </View>
   );
@@ -103,8 +111,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
-  startButtonWrapper: {
+  startCancelButtonsWrapper: {
     flex: 0.3,
+    flexDirection: 'row',
     padding: 15,
     justifyContent: 'center',
     alignItems: 'center',
@@ -115,5 +124,9 @@ const styles = StyleSheet.create({
     padding: 15,
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  clearSubject: {
+    paddingLeft: 25,
+    paddingBottom: 25,
   },
 });

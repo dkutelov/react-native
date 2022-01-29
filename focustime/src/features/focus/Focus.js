@@ -8,7 +8,7 @@ import { fontSizes, spacing } from '../../utils/sizes';
 import { colors } from '../../utils/colors';
 
 export const Focus = ({ addSubject }) => {
-  const [temp, setTemp] = React.useState();
+  const [subject, setSubject] = React.useState();
 
   return (
     <View style={styles.container}>
@@ -18,13 +18,13 @@ export const Focus = ({ addSubject }) => {
           <TextInput
             style={styles.input}
             onSubmitEditing={({ nativeEvent: { text } }) => {
-              setTemp(text);
+              setSubject(text);
             }}
           />
           <RoundedButton
             size={spacing.xxxl}
             title="+"
-            onPress={() => addSubject(temp)}
+            onPress={() => addSubject(subject)}
           />
         </View>
       </View>
