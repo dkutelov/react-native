@@ -27,6 +27,8 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 const Section: React.FC<{
   title: string;
 }> = ({children, title}) => {
@@ -73,9 +75,10 @@ const App = () => {
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
-          <Section title="Step One">
+          <Section title="Hello">
             Edit <Text style={styles.highlight}>App.tsx</Text> to change this
             screen and then come back to see your edits.
+            <Icon name="rocket" size={30} color="#900" />
           </Section>
           <Section title="See Your Changes">
             <ReloadInstructions />
