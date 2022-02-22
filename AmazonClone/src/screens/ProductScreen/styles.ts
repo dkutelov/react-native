@@ -1,7 +1,12 @@
 import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
+  root: {
+    padding: 20,
+    backgroundColor: 'white',
+  },
   title: {
+    color: '#333333',
     margin: 0,
   },
   price: {
@@ -14,5 +19,7 @@ export const styles = StyleSheet.create({
   },
   description: {
     fontSize: 10,
+    marginVertical: 20,
+    lineHeight: 16,
   },
 });
