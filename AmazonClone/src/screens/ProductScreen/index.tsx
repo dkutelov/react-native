@@ -7,6 +7,7 @@ import {styles} from './styles';
 import product from '../../data/product';
 import {QuantitySelector} from '../../components/SelectorQuantity';
 import {Button} from '../../components/Button';
+import {ImageCarousel} from '../../components/ImageCarousel.tsx';
 
 export const ProductScreen = () => {
   const [selectedOption, setSelectedOption] = React.useState(
@@ -17,7 +18,7 @@ export const ProductScreen = () => {
   return (
     <View style={styles.root}>
       <Text style={styles.title}>{product.title}</Text>
-
+      <ImageCarousel images={product.images} />
       <Picker
         selectedValue={selectedOption}
         onValueChange={(itemValue, _) => setSelectedOption(itemValue)}>
