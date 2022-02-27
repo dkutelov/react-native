@@ -8,7 +8,7 @@ import product from '../../data/product';
 import {QuantitySelector} from '../../components/SelectorQuantity';
 import {Button} from '../../components/Button';
 import {ImageCarousel} from '../../components/ImageCarousel';
-import {useRoute} from '@react-navigation/native';
+import {useRoute, useNavigation} from '@react-navigation/native';
 
 export const ProductScreen = () => {
   const [selectedOption, setSelectedOption] = React.useState(
@@ -16,10 +16,18 @@ export const ProductScreen = () => {
   );
   const [quantity, setQuantity] = React.useState(1);
   const route = useRoute();
+  const navigation = useNavigation();
 
   console.warn(route.params);
   return (
     <ScrollView style={styles.root}>
+      <Button
+        text="Back"
+        onPress={() => {
+          navigation.goBack();
+        }}
+        containerStyles={{alignSelf: 'flex-start', padding: 5}}
+      />
       <Text style={styles.title}>{product.title}</Text>
       <ImageCarousel images={product.images} />
       <Picker

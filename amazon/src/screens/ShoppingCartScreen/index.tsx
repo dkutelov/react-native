@@ -12,6 +12,10 @@ export const ShoppingCartScreen = () => {
     0,
   );
 
+  const onCheckout = () => {
+    navigation.navigate('AddressScreen');
+  };
+
   return (
     <View style={styles.page}>
       {/* Will Not Scroll With Content 
@@ -43,9 +47,7 @@ export const ShoppingCartScreen = () => {
             </Text>
             <Button
               text="Proceed To Checkout"
-              onPress={() => {
-                navigation.navigate('AddressScreen');
-              }}
+              onPress={onCheckout}
               containerStyles={{
                 backgroundColor: '#f7e300',
                 borderColor: '#f7e300',

@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Image, Text, Pressable} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import {useNavigation} from '@react-navigation/native';
 
 import {styles} from './styles';
 
@@ -14,11 +15,10 @@ interface ProductItemProps {
     price: number;
     oldPrice?: number;
   };
-  navigation: any;
 }
 
 export const ProductItem = (props: ProductItemProps) => {
-  const {item, navigation} = props;
+  const {item} = props;
 
   const getStarType = (index: number): string => {
     const roundedAvgRating = Math.floor(item.avgRating);
@@ -33,6 +33,7 @@ export const ProductItem = (props: ProductItemProps) => {
     return 'star-o';
   };
 
+  const navigation = useNavigation();
   const onPress = () => {
     navigation.navigate('ProductDetails', {id: item.id});
   };

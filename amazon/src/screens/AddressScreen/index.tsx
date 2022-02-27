@@ -70,7 +70,7 @@ export const AddressScreen = () => {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      keyboardVerticalOffset={Platform.OS === 'ios' ? 20 : 0}>
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 40 : 0}>
       <ScrollView style={styles.root}>
         <View style={styles.row}>
           <Text style={styles.label}>Select Your Country</Text>
