@@ -1,5 +1,13 @@
 import React, {useState} from 'react';
-import {View, Text, TextInput, Alert} from 'react-native';
+import {
+  KeyboardAvoidingView,
+  ScrollView,
+  View,
+  Text,
+  TextInput,
+  Alert,
+  Platform,
+} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import {styles} from './styles';
 import counitryList from 'country-list';
@@ -34,15 +42,7 @@ export const AddressScreen = () => {
     return names.length >= 2;
   };
 
-  const onCheckout = () => {
-    if (
-      !formValues.fullname ||
-      !formValues.phoneNumber ||
-      !formValues.address
-    ) {
-      Alert.alert('Please, fill in all required fields!');
-    }
-
+  const validateAddress = () => {
     if (!fullNameValid(formValues.fullname)) {
       setFormErrorValues({
         ...formErrorValues,
@@ -50,59 +50,104 @@ export const AddressScreen = () => {
       });
     }
   };
-  console.warn(formValues);
+  const onCheckout = () => {
+    // Check inline validators
+    validateAddress();
+    if (formErrorValues.fullnameError) {
+      return;
+    }
+
+    //On Submit Validation
+    if (
+      !formValues.fullname ||
+      !formValues.phoneNumber ||
+      !formValues.address
+    ) {
+      Alert.alert('Please, fill in all required fields!');
+    }
+  };
+
   return (
-    <View style={styles.root}>
-      <View style={styles.row}>
-        <Text style={styles.label}>Select Your Country</Text>
-        <Picker selectedValue={country} onValueChange={setCountry}>
-          {countries.map((c: Country) => (
-            <Picker.Item value={c.code} label={c.name} key={c.code} />
-          ))}
-        </Picker>
-      </View>
-      <View style={styles.row}>
-        <Text style={styles.label}>Full Name (First and Last name)</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Full Name"
-          value={formValues.fullname}
-          onChangeText={fullname => {
-            setFormValues({...formValues, fullname});
-            setFormErrorValues({
-              ...formErrorValues,
-              fullnameError: '',
-            });
-          }}
-        />
-        {formErrorValues.fullnameError.length > 0 && (
-          <Text style={styles.error}>{formErrorValues.fullnameError}</Text>
-        )}
-      </View>
-      <View style={styles.row}>
-        <Text style={styles.label}>Phone Number</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Phone Number"
-          value={formValues.phoneNumber}
-          onChangeText={phoneNumber => {
-            setFormValues({...formValues, phoneNumber});
-          }}
-          keyboardType={'phone-pad'}
-        />
-      </View>
-      <View style={styles.row}>
-        <Text style={styles.label}>Address</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Your Address"
-          value={formValues.address}
-          onChangeText={address => {
-            setFormValues({...formValues, address});
-          }}
-        />
-      </View>
-      <Button text="Check Out" onPress={onCheckout} />
-    </View>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 20 : 0}>
+      <ScrollView style={styles.root}>
+        <View style={styles.row}>
+          <Text style={styles.label}>Select Your Country</Text>
+          <Picker selectedValue={country} onValueChange={setCountry}>
+            {countries.map((c: Country) => (
+              <Picker.Item value={c.code} label={c.name} key={c.code} />
+            ))}
+          </Picker>
+        </View>
+        <View style={styles.row}>
+          <Text style={styles.label}>Full Name (First and Last name)</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Full Name"
+            value={formValues.fullname}
+            onEndEditing={validateAddress}
+            onChangeText={fullname => {
+              setFormValues({...formValues, fullname});
+              setFormErrorValues({
+                ...formErrorValues,
+                fullnameError: '',
+              });
+            }}
+          />
+          {formErrorValues.fullnameError.length > 0 && (
+            <Text style={styles.error}>{formErrorValues.fullnameError}</Text>
+          )}
+        </View>
+        <View style={styles.row}>
+          <Text style={styles.label}>Phone Number</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Phone Number"
+            value={formValues.phoneNumber}
+            onChangeText={phoneNumber => {
+              setFormValues({...formValues, phoneNumber});
+            }}
+            keyboardType={'phone-pad'}
+          />
+        </View>
+        <View style={styles.row}>
+          <Text style={styles.label}>Phone Number</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Phone Number"
+            value={formValues.phoneNumber}
+            onChangeText={phoneNumber => {
+              setFormValues({...formValues, phoneNumber});
+            }}
+            keyboardType={'phone-pad'}
+          />
+        </View>
+        <View style={styles.row}>
+          <Text style={styles.label}>Phone Number</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Phone Number"
+            value={formValues.phoneNumber}
+            onChangeText={phoneNumber => {
+              setFormValues({...formValues, phoneNumber});
+            }}
+            keyboardType={'phone-pad'}
+          />
+        </View>
+        <View style={styles.row}>
+          <Text style={styles.label}>Address</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Your Address"
+            value={formValues.address}
+            onChangeText={address => {
+              setFormValues({...formValues, address});
+            }}
+          />
+        </View>
+        <Button text="Check Out" onPress={onCheckout} />
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };

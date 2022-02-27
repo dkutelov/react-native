@@ -5,7 +5,8 @@ import {ProductItem} from '../../components/ProductItem';
 //Demo data
 import products from '../../data/products';
 
-const HomeScreen = () => {
+export const HomeScreen = () => {
+  console.warn('home');
   return (
     <View style={styles.page}>
       <FlatList
@@ -22,5 +23,3 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 });
-
-export default HomeScreen;
