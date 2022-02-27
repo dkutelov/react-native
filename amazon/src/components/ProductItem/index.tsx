@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Image, Text} from 'react-native';
+import {View, Image, Text, Pressable} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import {styles} from './styles';
@@ -14,10 +14,11 @@ interface ProductItemProps {
     price: number;
     oldPrice?: number;
   };
+  navigation: any;
 }
 
 export const ProductItem = (props: ProductItemProps) => {
-  const {item} = props;
+  const {item, navigation} = props;
 
   const getStarType = (index: number): string => {
     const roundedAvgRating = Math.floor(item.avgRating);
@@ -32,8 +33,12 @@ export const ProductItem = (props: ProductItemProps) => {
     return 'star-o';
   };
 
+  const onPress = () => {
+    navigation.navigate('ProductDetails', {id: item.id});
+  };
+
   return (
-    <View style={styles.root}>
+    <Pressable style={styles.root} onPress={onPress}>
       <Image
         style={styles.image}
         source={{
@@ -63,6 +68,6 @@ export const ProductItem = (props: ProductItemProps) => {
           )}
         </Text>
       </View>
-    </View>
+    </Pressable>
   );
 };

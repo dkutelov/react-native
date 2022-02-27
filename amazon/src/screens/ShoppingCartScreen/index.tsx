@@ -2,10 +2,11 @@ import React from 'react';
 import {View, Text, StyleSheet, FlatList} from 'react-native';
 import {Button} from '../../components/Button';
 import {CartProductItem} from '../../components/CartProductItem';
-
+import {useNavigation} from '@react-navigation/native';
 import products from '../../data/cart';
 
-const ShoppingCartScreen = () => {
+export const ShoppingCartScreen = () => {
+  const navigation = useNavigation();
   const totalPrice = products.reduce(
     (acc, product) => acc + product.item.price * product.quantity,
     0,
@@ -42,7 +43,9 @@ const ShoppingCartScreen = () => {
             </Text>
             <Button
               text="Proceed To Checkout"
-              onPress={() => console.warn('go to checkout')}
+              onPress={() => {
+                navigation.navigate('AddressScreen');
+              }}
               containerStyles={{
                 backgroundColor: '#f7e300',
                 borderColor: '#f7e300',
@@ -60,5 +63,3 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 });
-
-export default ShoppingCartScreen;

@@ -9,8 +9,8 @@ const Stack = createNativeStackNavigator();
 const Router = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Amazon Clone" component={BottomTabNav} />
+      <Stack.Navigator screenOptions={{headerShown: false}}>
+        <Stack.Screen name="HomeTabs" component={BottomTabNav} />
       </Stack.Navigator>
     </NavigationContainer>
   );

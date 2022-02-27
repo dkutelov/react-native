@@ -8,13 +8,16 @@ import product from '../../data/product';
 import {QuantitySelector} from '../../components/SelectorQuantity';
 import {Button} from '../../components/Button';
 import {ImageCarousel} from '../../components/ImageCarousel';
+import {useRoute} from '@react-navigation/native';
 
 export const ProductScreen = () => {
   const [selectedOption, setSelectedOption] = React.useState(
     product.options ? product.options[1] : null,
   );
   const [quantity, setQuantity] = React.useState(1);
+  const route = useRoute();
 
+  console.warn(route.params);
   return (
     <ScrollView style={styles.root}>
       <Text style={styles.title}>{product.title}</Text>
