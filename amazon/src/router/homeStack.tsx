@@ -36,16 +36,18 @@ export const HomeStack = () => {
   const [searchValue, setSearchValue] = React.useState<string>('');
 
   return (
-    <Stack.Navigator
-      screenOptions={{
-        header: () => (
-          <HeaderComponent
-            searchValue={searchValue}
-            setSearchValue={setSearchValue}
-          />
-        ),
-      }}>
-      <Stack.Screen name="HomeScreen" options={{title: 'Home'}}>
+    <Stack.Navigator>
+      <Stack.Screen
+        name="HomeScreen"
+        options={{
+          title: 'Home',
+          header: () => (
+            <HeaderComponent
+              searchValue={searchValue}
+              setSearchValue={setSearchValue}
+            />
+          ),
+        }}>
         {() => <HomeScreen searchValue={searchValue} />}
       </Stack.Screen>
       <Stack.Screen name="ProductDetails" component={ProductScreen} />
@@ -69,3 +71,13 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
 });
+
+// Can add to Stack.Navigator if needs to be on both stack screens
+//  screenOptions={{
+//       header: () => (
+//         <HeaderComponent
+//           searchValue={searchValue}
+//           setSearchValue={setSearchValue}
+//         />
+//       ),
+//     }}

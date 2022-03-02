@@ -21,13 +21,6 @@ export const ProductScreen = () => {
   console.warn(route.params);
   return (
     <ScrollView style={styles.root}>
-      <Button
-        text="Back"
-        onPress={() => {
-          navigation.goBack();
-        }}
-        containerStyles={{alignSelf: 'flex-start', padding: 5}}
-      />
       <Text style={styles.title}>{product.title}</Text>
       <ImageCarousel images={product.images} />
       <Picker
