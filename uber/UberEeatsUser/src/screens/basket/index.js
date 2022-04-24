@@ -26,6 +26,7 @@ export const BasketScreen = () => {
         data={restaurant.dishes}
         renderItem={({ item }) => <BasketDishItem basketDish={item} />}
         ItemSeparatorComponent={() => <View style={styles.separator} />}
+        keyExtractor={(item, index) => `${item.name}-${index.toString()}`}
       />
 
       <View style={styles.button}>
