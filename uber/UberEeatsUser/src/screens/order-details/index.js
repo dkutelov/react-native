@@ -47,6 +47,7 @@ const OrderDetails = () => {
       ListHeaderComponent={() => <OrderDetailsHeader order={order} />}
       data={restaurants[2].dishes}
       renderItem={({ item }) => <BasketDishItem basketDish={{ Dish: item }} />}
+      keyExtractor={(item, index) => `${item.name}-${index.toString()}`}
     />
   );
 };
