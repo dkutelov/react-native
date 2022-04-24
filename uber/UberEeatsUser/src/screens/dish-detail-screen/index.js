@@ -42,7 +42,8 @@ export const DishDetailScreen = () => {
       </View>
       <View style={styles.button}>
         <Text style={styles.buttonText}>
-          Add {quantity} dish{quantity > 1 && "es"} to basket {getTotal()}
+          Add {quantity} dish{quantity > 1 && "es"} to basket &#8226;{" "}
+          {getTotal()}
         </Text>
       </View>
     </View>
