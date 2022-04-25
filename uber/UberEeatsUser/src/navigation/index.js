@@ -1,5 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+//import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { Foundation, FontAwesome5, MaterialIcons } from "@expo/vector-icons";
 
 import { HomeScreen } from "../screens/home";
@@ -8,8 +9,10 @@ import { DishDetailScreen } from "../screens/dish-detail";
 import { OrderDetails } from "../screens/order-details";
 import { OrderScreen } from "../screens/orders";
 import { RestaurantDetailScreen } from "../screens/restaurant-detail";
+import { ProfileScreen } from "../screens/profile";
 
-const Tab = createMaterialBottomTabNavigator();
+//const Tab = createMaterialBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 
 const HomeTabs = () => {
   return (
@@ -77,8 +80,6 @@ const OrderStackNavigator = () => {
 };
 
 const Stack = createNativeStackNavigator();
-
-const ProfileScreen = () => null;
 
 export const RootNavigator = () => {
   //const { dbUser } = useAuthContext();

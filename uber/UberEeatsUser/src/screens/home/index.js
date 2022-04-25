@@ -19,5 +19,6 @@ export const HomeScreen = () => {
 const styles = StyleSheet.create({
   page: {
     padding: 10,
+    paddingTop: 0,
   },
 });

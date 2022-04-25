@@ -20,5 +20,5 @@ export const OrderScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  page: { flex: 1, width: "100%", paddingVertical: 30 },
+  page: { flex: 1, width: "100%", paddingVertical: 0 },
 });

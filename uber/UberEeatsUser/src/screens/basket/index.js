@@ -40,7 +40,6 @@ const styles = StyleSheet.create({
   page: {
     flex: 1,
     width: "100%",
-    paddingVertical: 30,
     padding: 10,
   },
   title: {
