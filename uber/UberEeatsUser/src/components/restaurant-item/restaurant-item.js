@@ -33,11 +33,12 @@ export const RestaurantItem = ({
         <View>
           <Text style={styles.title}>{title}</Text>
           <Text style={styles.subtitle}>
-            ${deliveryFee} &#8226; {minDeliveryTime}-{maxDeliveryTime} minutes
+            ${deliveryFee.toFixed(1)} &#8226; {minDeliveryTime}-
+            {maxDeliveryTime} minutes
           </Text>
         </View>
         <View style={styles.rating}>
-          <Text>{rating}</Text>
+          <Text>{rating.toFixed(1)}</Text>
         </View>
       </View>
     </Pressable>
