@@ -28,7 +28,7 @@ const OrderDetailsHeader = ({ order }) => {
   );
 };
 
-const OrderDetails = () => {
+export const OrderDetails = () => {
   const [order, setOrder] = useState(orders[0]);
   //const { getOrder } = useOrderContext();
   //const route = useRoute();
@@ -51,5 +51,3 @@ const OrderDetails = () => {
     />
   );
 };
-
-export default OrderDetails;

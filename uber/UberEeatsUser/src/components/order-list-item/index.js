@@ -1,11 +1,14 @@
 import { View, Text, Image, Pressable, StyleSheet } from "react-native";
-//import { useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 
 export const OrderListItem = ({ order }) => {
-  //const navigation = useNavigation();
+  const { navigate } = useNavigation();
 
   return (
-    <Pressable onPress={() => {}} style={styles.container}>
+    <Pressable
+      onPress={() => navigate("Order", { id: order.id })}
+      style={styles.container}
+    >
       <Image source={{ uri: order.Restaurant.image }} style={styles.image} />
 
       <View>
@@ -16,8 +19,6 @@ export const OrderListItem = ({ order }) => {
     </Pressable>
   );
 };
-
-//() => navigation.navigate("Order", { id: order.id })
 
 const styles = StyleSheet.create({
   container: { flexDirection: "row", margin: 10, alignItems: "center" },
