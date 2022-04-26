@@ -1,14 +1,32 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet, Pressable } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Pressable,
+  ActivityIndicator,
+} from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-import restaurants from "../../../assets/data/restaurants.json";
-import { useNavigation } from "@react-navigation/native";
-
-const dish = restaurants[0].dishes[0];
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { DataStore } from "aws-amplify";
+import { Dish } from "../../models";
 
 export const DishDetailScreen = () => {
-  const { navigate } = useNavigation();
   const [quantity, setQuantity] = useState(1);
+  const [dish, setDish] = useState();
+
+  const { navigate } = useNavigation();
+  const route = useRoute();
+  const id = route.params.id;
+  const getTotal = () => (dish.price * quantity).toFixed(2);
+
+  useEffect(() => {
+    if (id) {
+      (async () => {
+        setDish(await DataStore.query(Dish, id));
+      })();
+    }
+  }, [id]);
 
   const onMinusIconPressed = () => {
     if (quantity > 1) {
@@ -20,7 +38,7 @@ export const DishDetailScreen = () => {
     setQuantity((prev) => prev + 1);
   };
 
-  const getTotal = () => (dish.price * quantity).toFixed(2);
+  if (!dish) return <ActivityIndicator size="large" color="blue" />;
 
   return (
     <View style={styles.page}>

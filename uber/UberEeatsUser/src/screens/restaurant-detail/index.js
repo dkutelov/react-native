@@ -17,6 +17,8 @@ export const RestaurantDetailScreen = () => {
   const id = route.params.id;
 
   useEffect(() => {
+    if (!id) return;
+
     (async () => {
       setRestaurant(await DataStore.query(Restaurant, id));
       setDishes(
@@ -25,7 +27,7 @@ export const RestaurantDetailScreen = () => {
         })
       );
     })();
-  }, []);
+  }, [id]);
 
   if (!restaurant) {
     return <ActivityIndicator animating color="blue" />;
