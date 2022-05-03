@@ -5,6 +5,7 @@ import { Amplify } from "aws-amplify";
 import { withAuthenticator } from "aws-amplify-react-native";
 
 import config from "./src/aws-exports";
+import { AuthContextProvider } from "./src/context/auth.context";
 Amplify.configure({
   ...config,
   Analytics: {
@@ -14,7 +15,9 @@ Amplify.configure({
 
 const App = () => (
   <NavigationContainer>
-    <RootNavigator />
+    <AuthContextProvider>
+      <RootNavigator />
+    </AuthContextProvider>
     <StatusBar style="light" />
   </NavigationContainer>
 );

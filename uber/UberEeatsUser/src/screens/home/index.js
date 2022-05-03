@@ -9,6 +9,7 @@ export const HomeScreen = () => {
 
   useEffect(() => {
     (async () => {
+      const restaurants = await DataStore.query(Restaurant);
       setRestaurants(await DataStore.query(Restaurant));
     })();
   }, []);

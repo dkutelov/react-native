@@ -10,6 +10,7 @@ import { OrderDetails } from "../screens/order-details";
 import { OrderScreen } from "../screens/orders";
 import { RestaurantDetailScreen } from "../screens/restaurant-detail";
 import { ProfileScreen } from "../screens/profile";
+import { useAuthContext } from "../context/auth.context";
 
 //const Tab = createMaterialBottomTabNavigator();
 const Tab = createBottomTabNavigator();
@@ -82,8 +83,8 @@ const OrderStackNavigator = () => {
 const Stack = createNativeStackNavigator();
 
 export const RootNavigator = () => {
-  //const { dbUser } = useAuthContext();
-  const dbUser = true;
+  const { dbUser } = useAuthContext();
+
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       {dbUser ? (
