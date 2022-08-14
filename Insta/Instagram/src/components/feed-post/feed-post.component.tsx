@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Text, View, Image} from 'react-native';
+import {Text, View, Image, Pressable} from 'react-native';
 import colors from '../../theme/colors';
 import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -9,7 +9,8 @@ import Feather from 'react-native-vector-icons/Feather';
 import {styles} from './feed.styles';
 import {Comment} from '../comment';
 import {IPost} from '../types/models';
-
+import {Carousel} from '../carousel';
+import {SingleImage} from './single-image.component';
 interface IProps {
   post: IPost;
 }
@@ -42,21 +43,21 @@ export const FeedPost = ({post}: IProps) => {
           style={styles.threeDots}
         />
       </View>
-      <Image
-        source={{
-          uri: post.image,
-        }}
-        style={styles.image}
-      />
+      {post.image ? (
+        <SingleImage imageUrl={post.image} onDoublePress={toggeleLiked} />
+      ) : post.images ? (
+        <Carousel images={post.images} onDoublePress={toggeleLiked} />
+      ) : null}
       <View style={styles.footer}>
         <View style={styles.iconContainer}>
-          <AntDesign
-            name={isLiked ? 'heart' : 'hearto'}
-            size={24}
-            style={styles.icon}
-            color={isLiked ? colors.red : colors.black}
-            onPress={toggeleLiked}
-          />
+          <Pressable onPress={toggeleLiked}>
+            <AntDesign
+              name={isLiked ? 'heart' : 'hearto'}
+              size={24}
+              style={styles.icon}
+              color={isLiked ? colors.accent : colors.black}
+            />
+          </Pressable>
           <Ionicons
             name="chatbubble-outline"
             size={24}
